@@ -65,6 +65,11 @@ body{
     cursor: pointer;
 }
 
+.btn:hover{
+    background-color: rgba(138, 125, 254, 0.5);
+    border-radius: 5px;
+}
+
 .search{
     font-size: 1.2rem;
     background-color: #ffffff;
@@ -110,6 +115,7 @@ body{
 .random h1{
     font-size: 1.8rem;
     margin: 0;
+    text-align: center;
 }
 
 #random-toggle-outer{
@@ -117,6 +123,7 @@ body{
     align-items: center;
     height: 1rem;
     padding: 10px;
+    cursor: pointer;
 }
 
 #toggle-img{
@@ -192,9 +199,11 @@ body{
 #modal-close{
     width: fit-content;
     margin-left: auto;
-    margin-right: 0;
-    padding: 20px;
-    padding-bottom: 0;
+    margin-right: 15px;
+    margin-top: 15px;
+    padding: 5px;
+    /* padding: 20px;
+    padding-bottom: 0; */
     cursor: pointer;
     height: 1.5rem;
 }

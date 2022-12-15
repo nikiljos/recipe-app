@@ -5,7 +5,8 @@ let $catName = document.getElementById("cat-name");
 let $catInput = document.getElementById("cat-input");
 let $search = document.getElementById("search-btn");
 let $clear = document.getElementById("clear-btn");
-let $randomToggle=document.getElementById("random-toggle")
+let $randomToggle=document.getElementById("random-toggle-outer")
+let $randomToggleText = document.getElementById("random-toggle");
 let $toggleImg = document.getElementById("toggle-img");
 let $modal=document.getElementById("modal")
 let $modalContent = document.getElementById("modal-content");
@@ -118,7 +119,7 @@ function renderDishCard({id,img,name}){
 
 $randomToggle.onclick=toggleRandomCard
 function toggleRandomCard(hide){
-    let currentState = $randomToggle.innerText;
+    let currentState = $randomToggleText.innerText;
     if(hide===true&&currentState=="Show"){
         return
     }
@@ -129,7 +130,7 @@ function toggleRandomCard(hide){
     if(currentState=="Hide"){
         newState="Show"
     }
-    $randomToggle.innerText = newState;
+    $randomToggleText.innerText = newState;
     $toggleImg.setAttribute("src", `assets/icons/${newState.toLowerCase()}.png`);
     let $randomCard=document.getElementById("random-card")
     $randomCard.classList.toggle("hide")
