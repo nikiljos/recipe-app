@@ -54,7 +54,7 @@ body{
 }
 
 .head-text h1{
-        margin: 40px 0;
+    margin: 40px 0;
 }
 
 .head-text p{
@@ -165,6 +165,10 @@ body{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+}
+
+#cat-name{
+    font-size: 1.5rem;
 }
 
 .cat-result{

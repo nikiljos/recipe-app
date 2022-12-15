@@ -70,6 +70,7 @@ function loadCategoryDish(category){
     toggleRandomCard(true)
     if(category==""||category==undefined){
         $catName.innerText="Please enter a category";
+        $catGrp.innerHTML = "";
         return
     }
     $catName.innerText=`Showing results for ${category}`
@@ -193,9 +194,6 @@ function updateModal({status,ingredients,detail}){
             $li.innerText = elt;
             $ingList.append($li);
         });
-        // $recipeLink=document.createElement("a");
-        // $recipeLink.setAttribute("href","/recipe?id=123")
-        // $recipeLink.innerText="Recipe"
         $modalIng.append($ingList);
         $modalStatus.style.display = "none";
         $modalContent.style.display = "";
