@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <nav></nav>
+    <div class="header">
+        <div class="head-text">
+            <h1>The Utimate Recipe World!</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet tempus augue, rhoncus convallis nisi molestie ut. Phasellus tincidunt consequat tellus, facilisis lobortis nibh mattis a. Donec bibendum, nisl ut malesuada auctor, risus mauris consequat nunc, id facilisis turpis orci eu lacus. Nullam ornare dui ante, quis consectetur neque vehicula finibus. Curabitur consectetur risus et elit pellentesque, ac facilisis lacus pulvinar.</p>
+        </div>
+        <div id="search">
+            <div class="search">
+                <input type="text" id="cat-input" list="cat-list" placeholder="Search by Category">
+                <datalist id="cat-list"></datalist>
+                <span id="clear-btn" class="btn">✖️</span>
+                <span id="search-btn" class="btn">➡️</span>
+            </div>
+        </div>
+        
+        
+    </div>
+
+    <div class="content">
+        
+        <div class="random" id="random">
+            <h1>Dish of the moment!</h1>
+            <div id="random-toggle" class="btn">Hide</div>
+            <!-- <div class="card">
+                <img src="https://tiny.nikjos.in/img">
+                <h2>Mac Fried Rice</h2>
+            </div> -->
+        </div>
+
+    </div>
+    <div class="cat-result" id="dishes">
+        <h3 id="cat-name"></h3>
+        <div id="cat-grp"></div>
+    </div>
+
+    <div id="modal" class="modal hide">
+        <div class="modal-body">
+            <div id="modal-close">❌</div>
+            <h2>Ingredients</h2>
+            <div id="modal-content">
+                
+            </div>
+            
+        </div>
+
+    </div>
+    
+
+    <script src="app.js"></script>
+</body>
+</html>
