@@ -6,9 +6,12 @@ let $catInput = document.getElementById("cat-input");
 let $search = document.getElementById("search-btn");
 let $clear = document.getElementById("clear-btn");
 let $randomToggle=document.getElementById("random-toggle")
+let $toggleImg = document.getElementById("toggle-img");
 let $modal=document.getElementById("modal")
 let $modalContent = document.getElementById("modal-content");
+let $modalIng = document.getElementById("modal-ing");
 let $modalClose = document.getElementById("modal-close");
+let $modalStatus = document.getElementById("modal-status");
 
 
 let randomCardVisible=true;
@@ -49,7 +52,7 @@ function loadRandomDish(){
         return res.json()
     })
     .then(data=>{
-        console.log(data)
+        // console.log(data)
         let $randomCard = renderDishCard({
             id: data.meals[0].idMeal,
             img: data.meals[0].strMealThumb,
@@ -60,8 +63,8 @@ function loadRandomDish(){
     })
 }
 
-async function loadCategoryDish(category){
-    $catGrp.innerHTML = "";
+function loadCategoryDish(category){
+    $catGrp.innerHTML = "Loading...";
     window.location.href = "#search";
     toggleRandomCard(true)
     if(category==""||category==undefined){
@@ -73,7 +76,8 @@ async function loadCategoryDish(category){
     fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
     .then(res=>res.json())
     .then(data=>{
-        console.log(data.meals);
+        $catGrp.innerHTML = "";
+        // console.log(data.meals);
         if(data.meals==null){
             $catName.innerText="Invalid Category!"
             return
@@ -89,11 +93,9 @@ async function loadCategoryDish(category){
                 window.location.href = "#search";
             }
         })
-       
-        
-        
     })
     .catch(err=>{
+        $catGrp.innerHTML = "";
         $catName.innerText="Some Error Occured";
     })
 
@@ -120,12 +122,15 @@ function toggleRandomCard(hide){
     if(hide===true&&currentState=="Show"){
         return
     }
+    // else if(hide===false&&currentState=="Hide"){
+    //     return
+    // }
+    let newState="Hide"
     if(currentState=="Hide"){
-        $randomToggle.innerText = "Show";
+        newState="Show"
     }
-    else{
-        $randomToggle.innerText = "Hide";
-    }
+    $randomToggle.innerText = newState;
+    $toggleImg.setAttribute("src", `assets/icons/${newState.toLowerCase()}.png`);
     let $randomCard=document.getElementById("random-card")
     $randomCard.classList.toggle("hide")
 }
@@ -136,48 +141,86 @@ function toggleModal(){
 
 function initModal(e){
     
-    console.log(e.target, e.target.parentNode);
+    // console.log(e.target, e.target.parentNode);
+    $modalStatus.innerHTML = "Loading...";
+    $modalStatus.style.display=""
+    $modalContent.style.display = "none";
     let id=e.target.dataset.meal_id;
     if(!id){
         id = e.target.parentNode.dataset.meal_id;
     }
-    $modalContent.innerHTML = "Loading...";
+    // $modalIng.innerHTML = "Loading...";
     toggleModal();
     fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
     .then(res=>res.json())
     .then(data=>{
         let meal=data.meals[0];
         let ingredients=[]
+        let detail = {
+            name: meal.strMeal,
+            img: meal.strMealThumb,
+            ytURL: meal.strYoutube,
+            webURL: meal.strSource,
+        };
         for(let i=1;i<=20;i++){
             let ing=meal[`strIngredient${i}`]
             if(ing&&ing!=""){
                 ingredients.push(ing)
             }
         }
-        generateModal({
+
+        updateModal({
             status:true,
-            ingredients
+            ingredients,
+            detail
         })
     })
     .catch(err=>{
         console.log(err)
-        generateModal({status:false})
+        updateModal({status:false})
     })
 
 }
 
-function generateModal({status,ingredients}){
-    $modalContent.innerHTML = "";
+function updateModal({status,ingredients,detail}){
+    $modalIng.innerHTML = "";
     if(status){
+        updateModalDetail(detail)
         let $ingList = document.createElement("ul");
         ingredients.forEach((elt) => {
             let $li = document.createElement("li");
             $li.innerText = elt;
             $ingList.append($li);
         });
-        $modalContent.append($ingList);
+        // $recipeLink=document.createElement("a");
+        // $recipeLink.setAttribute("href","/recipe?id=123")
+        // $recipeLink.innerText="Recipe"
+        $modalIng.append($ingList);
+        $modalStatus.style.display = "none";
+        $modalContent.style.display = "";
     }
     else{
-        $modalContent.innerText = "Error";
+        $modalStatus.innerText = "Sorry, Some error occured 🥲";
     } 
+}
+
+function updateModalDetail({img,name,ytURL,webURL}){
+    let $dishImg=document.getElementById("dish-img")
+    $dishImg.setAttribute("src",img)
+    let $dishName = document.getElementById("dish-name");
+    $dishName.innerText=name
+    let $ytURL = document.getElementById("yt-btn");
+    let $webURL = document.getElementById("web-btn");
+    $ytURL.style.display="none";
+    $webURL.style.display = "none";
+    if (ytURL !== null && ytURL !== "") {
+        $ytURL.setAttribute("href", ytURL);
+        $ytURL.style.display = "";
+    }
+    if(webURL!==null && webURL!==""){
+        let externalDomain = webURL.split("/")[2];
+        $webURL.setAttribute("href", webURL);
+        $webURL.setAttribute("title", `Redirects to ${externalDomain}`);
+        $webURL.style.display = "";
+    }  
 }

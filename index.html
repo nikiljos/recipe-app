@@ -11,15 +11,15 @@
     <nav></nav>
     <div class="header">
         <div class="head-text">
-            <h1>The Utimate Recipe World!</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet tempus augue, rhoncus convallis nisi molestie ut. Phasellus tincidunt consequat tellus, facilisis lobortis nibh mattis a. Donec bibendum, nisl ut malesuada auctor, risus mauris consequat nunc, id facilisis turpis orci eu lacus. Nullam ornare dui ante, quis consectetur neque vehicula finibus. Curabitur consectetur risus et elit pellentesque, ac facilisis lacus pulvinar.</p>
+            <h1>The Recipe World!</h1>
+            <p>Welcome to The Recipe World! Here you can find a wide variety of dishes to try in the kitchen. You can search for specific recipes based on categories, or discover new random recipes we suggest. Whether you're a beginner cook or a culinary expert, you'll find something to love on our site.<br><br>Happy cooking!</p>
         </div>
         <div id="search">
             <div class="search">
                 <input type="text" id="cat-input" list="cat-list" placeholder="Search by Category">
                 <datalist id="cat-list"></datalist>
-                <span id="clear-btn" class="btn">✖️</span>
-                <span id="search-btn" class="btn">➡️</span>
+                <div id="clear-btn" class="btn"><img src="assets/icons/close.png" alt="✖️" class="icon"></div>
+                <div id="search-btn" class="btn"><img src="assets/icons/search.png" alt="➡️" class="icon"></div>
             </div>
         </div>
         
@@ -30,7 +30,7 @@
         
         <div class="random" id="random">
             <h1>Dish of the moment!</h1>
-            <div id="random-toggle" class="btn">Hide</div>
+            <div id="random-toggle-outer" class="btn"><img src="assets/icons/hide.png" alt="" id="toggle-img"> <span id="random-toggle">Hide</span></div>
             <!-- <div class="card">
                 <img src="https://tiny.nikjos.in/img">
                 <h2>Mac Fried Rice</h2>
@@ -45,11 +45,24 @@
 
     <div id="modal" class="modal hide">
         <div class="modal-body">
-            <div id="modal-close">❌</div>
-            <h2>Ingredients</h2>
+            <div id="modal-close"><img src="assets/icons/close.png" alt="❌" class="icon"></div>
+            <div id="modal-status">Loading...</div>
             <div id="modal-content">
-                
+                <div class="detail">
+                <img src="https://tiny.nikjos.in/img" alt="" id="dish-img">
+                <div class="data-card">
+                    <div id="dish-name">Loading...</div>
+                    <div class="recipe-cta">
+                        <a id="yt-btn" target="_blank" href="" title="Redirects to Youtube">Watch on Youtube</a>
+                        <a id="web-btn" target="_blank" href="" title="Redirects to External Website">View Recipe</a>
+                    </div>
+                </div>
             </div>
+            <h2>Ingredients</h2>
+            <div id="modal-ing"></div>
+            </div>
+            
+            
             
         </div>
 
