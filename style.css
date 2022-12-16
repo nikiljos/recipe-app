@@ -1,7 +1,6 @@
 :root {
   --pink: hsla(340, 100%, 64%, 0.1);
   --blue: hsla(203, 98%, 55%, 0.1);
-  --link-color: hsla(203, 98%, 35%, 0.1);
   --primary-gradient-stop-0: var(--pink);
   --primary-gradient-stop-1: rgba(255, 66, 179, 0.1);
   --primary-gradient-stop-2: rgba(255, 61, 223, 0.1);
@@ -44,7 +43,8 @@ body{
     align-items: center;
     color: #ffffff;
     margin: 0px 0px 50px 0px;
-    background: url("assets/banner.png");
+    background:linear-gradient(rgba(0, 0, 0, 0.7)0%,rgba(0, 0, 0, 0.6)80%), url("assets/banner.png");
+    background-size: cover;
     background-position: center;
 }
 
@@ -109,7 +109,7 @@ body{
     /* border: 2px solid black; */
     border-radius: 10px;
     background:var(--primary-gradient);
-    /* transition: all 10s; */
+    /* transition: height 2s; */
 }
 
 .random h1{
@@ -173,7 +173,29 @@ body{
 
 .cat-result{
     margin: 20px;
-    padding-top: 20px;
+    padding: 20px 0;
+}
+
+footer hr{
+    border: none;
+    border-bottom: 1.8px solid black;
+    margin: 0;
+}
+
+.footer{
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer a{
+    text-decoration: none;
+    color: black;
+}
+
+.footer a:hover{
+    color: rgb(17, 9, 76);
 }
 
 .modal{
@@ -213,6 +235,8 @@ body{
 }
 
 .modal-body h2{
+    font-weight: 600;
+    font-size: 1.4rem;
     margin-bottom: 0;
 }
 
@@ -240,10 +264,15 @@ body{
     margin-right: 30px;
 }
 
-#dish-name{
-    font-size: 1.3rem;
-    font-weight: 600;
+.dish-name{
+    font-size: 1.5rem;
+    font-weight: 700;
     padding: 10px 0;
+}
+
+.dish-name.small{
+    font-size: 1.3rem;
+    padding: 0;
 }
 
 .recipe-cta{
@@ -261,7 +290,10 @@ body{
     border-radius: 5px;
     background-color: #6e3ea4;
     color: #ffffff;
-    border: 1px solid #6e3ea4;
+    border: 2px solid #6e3ea4;
+    font-size: .95rem;
+    font-weight: 500;
+    transition: background-color .4s;
 }
 
 .recipe-cta a:hover{

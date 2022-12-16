@@ -16,6 +16,7 @@ let $modalStatus = document.getElementById("modal-status");
 
 
 let randomCardVisible=true;
+let rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
 
 loadCategoryList();
 loadRandomDish()
@@ -207,16 +208,26 @@ function updateModalDetail({img,name,ytURL,webURL}){
     let $dishImg=document.getElementById("dish-img")
     $dishImg.setAttribute("src",img)
     let $dishName = document.getElementById("dish-name");
+    $dishName.classList.remove("small");
     $dishName.innerText=name
+    let ytAvailable=(ytURL !== null && ytURL !== "")
+    let webAvailable=(webURL!==null && webURL!=="")
+    setTimeout(()=>{
+        let textHeight = $dishName.offsetHeight;
+        if ((textHeight > rem * 2 + 20)&&ytAvailable&&webAvailable) {
+            $dishName.classList.add("small");
+            console.log(textHeight, rem);
+        }
+    },100)
     let $ytURL = document.getElementById("yt-btn");
     let $webURL = document.getElementById("web-btn");
     $ytURL.style.display="none";
     $webURL.style.display = "none";
-    if (ytURL !== null && ytURL !== "") {
+    if (ytAvailable) {
         $ytURL.setAttribute("href", ytURL);
         $ytURL.style.display = "";
     }
-    if(webURL!==null && webURL!==""){
+    if(webAvailable){
         let externalDomain = webURL.split("/")[2];
         $webURL.setAttribute("href", webURL);
         $webURL.setAttribute("title", `Redirects to ${externalDomain}`);
