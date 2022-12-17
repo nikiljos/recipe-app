@@ -40,6 +40,7 @@ function loadCategoryList(){
         return res.json()
     })
     .then(data=>{
+        $catInput.setAttribute("placeholder","Search by Category")
         data.meals.forEach((elt) => {
             let $opt=document.createElement("option");
             $opt.value=elt.strCategory
@@ -100,7 +101,7 @@ function loadCategoryDish(category){
     })
     .catch(err=>{
         $catGrp.innerHTML = "";
-        $catGrp.innerHTML = "<h2>Sorry, Some error occured!<h2>";
+        $catGrp.innerHTML = "<h2>Sorry, Some error occured!</h2>";
     })
 
     
@@ -210,6 +211,7 @@ function updateModal({status,ingredients,detail}){
             $modalIng.append($ingCard);
         });
         // $modalIng.append($ingList);
+        $modalIng.scrollTop
         $modalStatus.style.display = "none";
         $modalContent.style.display = "";
     }
