@@ -20,7 +20,6 @@ let rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
 
 loadCategoryList();
 loadRandomDish()
-// loadCategoryDish("chicken")
 
 $search.onclick=()=>{
     loadCategoryDish($catInput.value)
@@ -34,6 +33,7 @@ $modalClose.onclick=()=>{
     $modal.classList.toggle("hide")
 }
 
+// fetch list of categories and add to datalist 
 function loadCategoryList(){
     fetch("https://www.themealdb.com/api/json/v1/1/list.php?c=list")
     .then(res=>{
@@ -55,7 +55,6 @@ function loadRandomDish(){
         return res.json()
     })
     .then(data=>{
-        // console.log(data)
         let $randomCard = renderDishCard({
             id: data.meals[0].idMeal,
             img: data.meals[0].strMealThumb,
@@ -64,8 +63,12 @@ function loadRandomDish(){
         $randomCard.id="random-card"
         $random.append($randomCard);
     })
+    .catch(err=>{
+        // console.log(err)
+    })
 }
 
+// load dishes based on category searched
 function loadCategoryDish(category){
     $catGrp.innerHTML = "<h2>Loading...</h2>";
     $catName.innerText = "";
@@ -107,7 +110,7 @@ function loadCategoryDish(category){
     
 }
 
-
+// return dish card used inside search results
 function renderDishCard({id,img,name}){
     let $card=document.createElement("div");
     $card.classList.add("card")
@@ -121,6 +124,7 @@ function renderDishCard({id,img,name}){
     return $card
 }
 
+//returns ingredient cards used inside modal
 function renderIngCard({img,name}){
     let $card=document.createElement("div");
     $card.classList.add("ing");
@@ -132,15 +136,13 @@ function renderIngCard({img,name}){
     return $card
 }
 
+// random card show/hide
 $randomToggle.onclick=toggleRandomCard
 function toggleRandomCard(hide){
     let currentState = $randomToggleText.innerText;
     if(hide===true&&currentState=="Show"){
         return
     }
-    // else if(hide===false&&currentState=="Hide"){
-    //     return
-    // }
     let newState="Hide"
     if(currentState=="Hide"){
         newState="Show"
@@ -155,6 +157,7 @@ function toggleModal(){
     $modal.classList.toggle("hide")
 }
 
+// call details api, pass data to render functions and control visibility
 function initModal(e){
     
     // console.log(e.target, e.target.parentNode);
@@ -192,12 +195,13 @@ function initModal(e){
         })
     })
     .catch(err=>{
-        console.log(err)
+        // console.log(err)
         updateModal({status:false})
     })
 
 }
 
+//adds ingredient cards to maodal and calls detail render function
 function updateModal({status,ingredients,detail}){
     $modalIng.innerHTML = "";
     if(status){
@@ -220,6 +224,7 @@ function updateModal({status,ingredients,detail}){
     } 
 }
 
+//renders dish detail and cta buttons in modal
 function updateModalDetail({img,name,ytURL,webURL}){
     let $dishImg=document.getElementById("dish-img")
     let $recipeCta = document.getElementById("recipe-cta");
@@ -239,7 +244,7 @@ function updateModalDetail({img,name,ytURL,webURL}){
         if ((textHeight > rem * 2 + 20)&&ytAvailable&&webAvailable) {
             $dishName.classList.add("small");
             $recipeCta.classList.add("small");
-            console.log(textHeight, rem);
+            // console.log(textHeight, rem);
         }
     },100)
     $ytURL.style.display="none";

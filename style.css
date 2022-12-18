@@ -36,6 +36,7 @@ body{
     font-family: sans-serif;
 }
 
+/* header section */
 .header{
     padding: 20px;
     display: flex;
@@ -61,6 +62,7 @@ body{
     font-size: 1.1rem;
 }
 
+/* search bar  */
 .btn{
     cursor: pointer;
 }
@@ -97,6 +99,7 @@ body{
     height: 100%
 }
 
+/* random dish section  */
 .random{
     padding: 20px;
     margin: 0 auto;
@@ -130,6 +133,7 @@ body{
     margin: 0 5px;
 }
 
+/* dish card  */
 .card{
     text-align: center;
     margin: 20px 10px;
@@ -157,10 +161,7 @@ body{
     font-size: 100%;
 }
 
-#search-btn{
-    cursor: pointer;
-}
-
+/* search result section  */
 #cat-grp{
     display: flex;
     flex-wrap: wrap;
@@ -177,6 +178,7 @@ body{
     padding: 20px 0;
 }
 
+/* result section intial content  */
 .intro{
     text-align: center;
     font-size: 1.5rem;
@@ -191,7 +193,8 @@ body{
 }
 
 .intro a{
-    color: #3e4da4;
+    color: #6e3ea4;
+    font-weight: 550;
     text-decoration-line: underline;
     text-decoration-style: wavy;
     text-decoration-color: #ffffff;
@@ -202,6 +205,7 @@ body{
     text-decoration-color: #6e3ea4;
 }
 
+/* footer  */
 footer hr{
     border: none;
     border-bottom: 1.8px solid #555555;
@@ -225,6 +229,7 @@ footer hr{
     color: rgb(17, 9, 76);
 }
 
+/* modal styling start  */
 .modal{
     margin: 0;
     padding: 0;
@@ -265,13 +270,6 @@ footer hr{
     font-weight: 600;
     font-size: 1.4rem;
     margin-bottom: 0;
-}
-
-#modal-ing{
-    height: calc(80vh - 260px);
-    margin-right: 20px;
-    margin-bottom: 20px;
-    overflow: scroll;
 }
 
 #modal-status{
@@ -339,11 +337,16 @@ footer hr{
 }
 
 #modal-ing{
+    height: calc(80vh - 260px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+    overflow: scroll;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
 
+/* ingredient card  */
 .ing{
     height: fit-content;
     min-width: 180px;
@@ -367,11 +370,12 @@ footer hr{
 .ing div{
     width: 100px;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     padding: 5px;
 }
 
+/* minimalize scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
     background-color: #00000000;
