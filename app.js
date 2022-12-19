@@ -64,7 +64,7 @@ function loadRandomDish(){
         $random.append($randomCard);
     })
     .catch(err=>{
-        // console.log(err)
+        alert("Sorry, Some error Occured in fetching random meal...")
     })
 }
 
@@ -84,7 +84,6 @@ function loadCategoryDish(category){
     .then(res=>res.json())
     .then(data=>{
         $catGrp.innerHTML = "";
-        // console.log(data.meals);
         if(data.meals==null){
             $catGrp.innerHTML="<h2>Invalid Category!</h2>"
             return
@@ -159,8 +158,6 @@ function toggleModal(){
 
 // call details api, pass data to render functions and control visibility
 function initModal(e){
-    
-    // console.log(e.target, e.target.parentNode);
     $modalStatus.innerHTML = "Loading...";
     $modalStatus.style.display=""
     $modalContent.style.display = "none";
@@ -168,7 +165,6 @@ function initModal(e){
     if(!id){
         id = e.target.parentNode.dataset.meal_id;
     }
-    // $modalIng.innerHTML = "Loading...";
     toggleModal();
     fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
     .then(res=>res.json())
@@ -195,7 +191,6 @@ function initModal(e){
         })
     })
     .catch(err=>{
-        // console.log(err)
         updateModal({status:false})
     })
 
@@ -215,9 +210,11 @@ function updateModal({status,ingredients,detail}){
             $modalIng.append($ingCard);
         });
         // $modalIng.append($ingList);
-        $modalIng.scrollTop
         $modalStatus.style.display = "none";
         $modalContent.style.display = "";
+        $modalIng.scroll({
+            top: 0,
+        });
     }
     else{
         $modalStatus.innerText = "Sorry, Some error occured 🥲";
@@ -232,7 +229,6 @@ function updateModalDetail({img,name,ytURL,webURL}){
     let $ytURL = document.getElementById("yt-btn");
     let $webURL = document.getElementById("web-btn");
     $dishImg.setAttribute("src",img)
-    
     $dishName.classList.remove("small");
     $recipeCta.classList.remove("small");
     $dishName.innerText=name
@@ -244,7 +240,6 @@ function updateModalDetail({img,name,ytURL,webURL}){
         if ((textHeight > rem * 2 + 20)&&ytAvailable&&webAvailable) {
             $dishName.classList.add("small");
             $recipeCta.classList.add("small");
-            // console.log(textHeight, rem);
         }
     },100)
     $ytURL.style.display="none";
