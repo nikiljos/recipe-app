@@ -1,4 +1,5 @@
 :root {
+    /* variables for random section background  */
   --pink: hsla(340, 100%, 64%, 0.1);
   --blue: hsla(203, 98%, 55%, 0.1);
   --primary-gradient-stop-0: var(--pink);

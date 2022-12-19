@@ -35,19 +35,20 @@ $modalClose.onclick=()=>{
 }
 
 // fetch list of categories and add to datalist 
-function loadCategoryList(){
-    fetch("https://www.themealdb.com/api/json/v1/1/list.php?c=list")
+async function loadCategoryList(){
+    await fetch("https://www.themealdb.com/api/json/v1/1/list.php?c=list")
     .then(res=>{
         return res.json()
     })
     .then(data=>{
-        $catInput.setAttribute("placeholder","Search by Category")
         data.meals.forEach((elt) => {
             let $opt=document.createElement("option");
             $opt.value=elt.strCategory
             $catList.append($opt)
         });
     })
+    .catch(err=>{})
+    $catInput.setAttribute("placeholder", "Search by Category");
 }
 
 //load data for random card and render random section
@@ -66,7 +67,7 @@ function loadRandomDish(){
         $random.append($randomCard);
     })
     .catch(err=>{
-        alert("Sorry, Some error Occured in fetching random meal...")
+        $random.innerHTML="Sorry, Some error occured in fetching random meal.";
     })
 }
 
@@ -237,9 +238,9 @@ function updateModalDetail({img,name,ytURL,webURL}){
     $dishName.innerText=name
     let ytAvailable=(ytURL !== null && ytURL !== "")
     let webAvailable=(webURL!==null && webURL!=="")
+    //100ms wait for innertext to be rendered before calculating height 
     setTimeout(()=>{
         let textHeight = $dishName.offsetHeight;
-        
         if ((textHeight > rem * 2 + 20)&&ytAvailable&&webAvailable) {
             $dishName.classList.add("small");
             $recipeCta.classList.add("small");
