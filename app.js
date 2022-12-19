@@ -16,10 +16,11 @@ let $modalStatus = document.getElementById("modal-status");
 
 
 let randomCardVisible=true;
+// get fontsize for finding height overflow 
 let rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
 
 loadCategoryList();
-loadRandomDish()
+loadRandomDish();
 
 $search.onclick=()=>{
     loadCategoryDish($catInput.value)
@@ -49,6 +50,7 @@ function loadCategoryList(){
     })
 }
 
+//load data for random card and render random section
 function loadRandomDish(){
     fetch("https://www.themealdb.com/api/json/v1/1/random.php")
     .then(res=>{
@@ -152,6 +154,7 @@ function toggleRandomCard(hide){
     $randomCard.classList.toggle("hide")
 }
 
+//modal open,close
 function toggleModal(){
     $modal.classList.toggle("hide")
 }
